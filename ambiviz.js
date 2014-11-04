@@ -1,39 +1,41 @@
 function time_curve(weather){
   var start = new Date().setHours(0,0,0,0);
   var end = new Date().setHours(23,59,59,999);
+  var noon = new Date().setHours(12,00,00,000);
   var now = new Date().getTime();
-  var progress = 1-((now - start) / (end - start));
+  var progress = 1-(Math.abs(noon-now) / (end - start));
   var p_lerp = parseInt(progress * 255);
-
-  var col = "#" + to_hex(p_lerp) + to_hex(p_lerp) + to_hex(p_lerp);
-  var anti_col = "#" + to_hex(255-p_lerp) + to_hex(255-p_lerp) + to_hex(255-p_lerp);
-
-  // var suncol = get_weather()
-  console.log(col);
-
-  $(document.body).velocity({ 
-    backgroundColor: anti_col,
-    color: col
-  }, 3000); 
+  var col = hex_assemble(p_lerp,p_lerp,p_lerp);
+  var anti_col = hex_assemble(255-p_lerp,255-p_lerp,255-p_lerp);
+  var suncol = get_weather(progress);
 }
 
-function get_weather(){
-  var col = "#000000"
+function get_weather(day){
   $.simpleWeather({
     location: 'San Francisco, CA',
     woeid: '',
     unit: 'c',
-    success: function(weather) {
-      col = get_weather_colour(weather.thumbnail);
+    success: function(weather){
+      switch(weather.currently.toLowerCase())
+      {
+        case "mostly cloudy":
+          bg = hex_assemble(135*day, 206*day, 235*day);
+          break;
+        default:
+          bg = "#FFFFFF";
+          break;
+      }
+      $(document.body).velocity({ 
+        backgroundColor: bg,
+        color: hex_assemble(255*day, 255*day, 255*day)
+      }, 3000); 
     }
   });
-  return col;
 }
 
-function get_weather_colour(thumbnail) {
-  var img = new Image();
-  img.src = thumbnail;
-  var col_hex = '#000000'
+function hex_assemble(r,g,b)
+{
+  return "#" + to_hex(parseInt(r)) + to_hex(parseInt(g)) + to_hex(parseInt(b));
 }
 
 function to_hex(v) {
@@ -44,5 +46,6 @@ function to_hex(v) {
 $(document).ready(function() {
   document.body.style.backgroundColor = "rgb(100,100,100)";
   time_curve();
+  setInterval(get_weather, 600000);
 });
 
