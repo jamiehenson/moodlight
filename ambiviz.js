@@ -8,10 +8,10 @@ function ambiviz(selector, location){
   var p_lerp = parseInt(progress * 255);
   var col = hex_assemble(p_lerp,p_lerp,p_lerp);
   var anti_col = hex_assemble(255-p_lerp,255-p_lerp,255-p_lerp);
-  get_weather(selector, location, now, progress);
+  get_weather(selector, location, progress);
 }
 
-function get_weather(sel, loc, now, progress)
+function get_weather(sel, loc, progress)
 {
   $.simpleWeather({
     location: loc,
@@ -20,7 +20,9 @@ function get_weather(sel, loc, now, progress)
     success: function(weather)
     {
       $(sel + "-footer").html(weather.temp + "&deg;C - " + weather.city + ", " + weather.region);
-      if (now < get_sun_time(weather.sunset) && now > get_sun_time(weather.sunrise))
+      var title = weather.title.split(" ")
+      var now = convert_time(title[title.length - 3] + title[title.length - 2]);
+      if (now < convert_time(weather.sunset) && now > convert_time(weather.sunrise))
       {
         switch(weather.currently.toLowerCase())
         {
@@ -48,7 +50,7 @@ function get_weather(sel, loc, now, progress)
   });
 }
 
-function get_sun_time(time)
+function convert_time(time)
 {
   var split = time.split(/[\s:]+/)
   if (split[2] == "pm") { split[0] = parseInt(split[0]) + 12; }

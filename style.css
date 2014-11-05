@@ -1,5 +1,7 @@
 @import url('http://fonts.googleapis.com/css?family=Open+Sans');
 
+html,body { margin:0px; padding:0px }
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
@@ -31,8 +33,8 @@ h1 {
 #container-left-footer, #container-right-footer
 {
   position: relative;
-  margin-top: 100%;
-  height: 30px;
+  margin-top: 95%;
+  height: 5%;
   color: white;
   width: 95%;
   padding: 2.5%;
