@@ -1,4 +1,5 @@
-function time_curve(weather){
+function ambiviz(selector, location){
+  setInterval(get_weather, 600000);
   var start = new Date().setHours(0,0,0,0);
   var end = new Date().setHours(23,59,59,999);
   var noon = new Date().setHours(12,00,00,000);
@@ -7,30 +8,51 @@ function time_curve(weather){
   var p_lerp = parseInt(progress * 255);
   var col = hex_assemble(p_lerp,p_lerp,p_lerp);
   var anti_col = hex_assemble(255-p_lerp,255-p_lerp,255-p_lerp);
-  var suncol = get_weather(progress);
+  get_weather(selector, location, now, progress);
 }
 
-function get_weather(day){
+function get_weather(sel, loc, now, progress)
+{
   $.simpleWeather({
-    location: 'San Francisco, CA',
+    location: loc,
     woeid: '',
     unit: 'c',
-    success: function(weather){
-      switch(weather.currently.toLowerCase())
+    success: function(weather)
+    {
+      $(sel + "-footer").html(weather.temp + "&deg;C - " + weather.city + ", " + weather.region);
+      if (now < get_sun_time(weather.sunset) && now > get_sun_time(weather.sunrise))
       {
-        case "mostly cloudy":
-          bg = hex_assemble(135*day, 206*day, 235*day);
-          break;
-        default:
-          bg = "#FFFFFF";
-          break;
+        switch(weather.currently.toLowerCase())
+        {
+          case "mostly cloudy":
+          case "fair":
+            bg = hex_assemble(135*progress, 206*progress, 235*progress);
+            col = hex_assemble(255*progress, 255*progress, 255*progress);
+            break;
+          default:
+            bg = "#FFFFFF";
+            col = hex_assemble(255*progress, 255*progress, 255*progress);
+            break;
+        }
       }
-      $(document.body).velocity({ 
+      else
+      {
+        bg = "#000011";
+        col = "#FFFFFF";
+      }
+      $(sel).velocity({ 
         backgroundColor: bg,
-        color: hex_assemble(255*day, 255*day, 255*day)
+        color: col 
       }, 3000); 
     }
   });
+}
+
+function get_sun_time(time)
+{
+  var split = time.split(/[\s:]+/)
+  if (split[2] == "pm") { split[0] = parseInt(split[0]) + 12; }
+  return new Date().setHours(parseInt(split[0]),parseInt(split[1]),0,0);
 }
 
 function hex_assemble(r,g,b)
@@ -42,10 +64,3 @@ function to_hex(v) {
     var hex = v.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
 }
-
-$(document).ready(function() {
-  document.body.style.backgroundColor = "rgb(100,100,100)";
-  time_curve();
-  setInterval(get_weather, 600000);
-});
-

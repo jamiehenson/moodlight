@@ -3,3 +3,49 @@
 body {
   font-family: 'Open Sans', sans-serif;
 }
+
+h1 {
+  text-align: center;
+  font-size: 2em;
+}
+
+#container-left, #container-right
+{
+  width: 50%;
+  float: left;
+}
+
+#container-top
+{
+  position: absolute;
+  color: white;
+}
+
+.inner
+{
+  text-align: justify;
+  width: 66%; 
+  margin: auto;
+}
+
+#container-left-footer, #container-right-footer
+{
+  position: relative;
+  margin-top: 100%;
+  height: 30px;
+  color: white;
+  width: 95%;
+  padding: 2.5%;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#container-left-footer
+{
+  text-align: left;
+} 
+
+#container-right-footer
+{
+  text-align: right;
+} 
