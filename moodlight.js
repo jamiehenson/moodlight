@@ -1,4 +1,4 @@
-function Ambiviz(data) {
+function Moodlight(data) {
   data.objects.forEach(function(object) {
     process_object(object);
   }); 
