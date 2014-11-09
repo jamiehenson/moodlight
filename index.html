@@ -4,11 +4,24 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.jsdelivr.net/velocity/1.1.0/velocity.min.js"></script>
   <script src="ambiviz.js"></script>
-  <script>var a = new ambiviz("#container-left","Bristol");</script>
-  <script>
-    var snip1 = ({backgroundColor: '#000000', color: '#FFFFFF'})
-    var snip2 = ({backgroundColor: '#FFFFFF', color: '#000000'})
-    var b = new ambiviz("#container-right","San Francisco",snip1,snip2);
+    <script>
+    var a = new Ambiviz({
+      selector : "container-left",
+      location : "Bristol",
+      css : {backgroundColor: '#FFFFFF', color: '#000000'}
+    });
+
+    var b = new Ambiviz({
+      selector : "container-right",
+      location : "San Francisco",
+      css : {backgroundColor: '#FFFFFF', color: '#000000'}
+    });
+
+    var c = new Ambiviz({
+      selector : "container-top",
+      location : "San Francisco",
+      css : {color: 'rgb(255, 0, 0)'}
+    });
   </script>
   <title>Ambiviz</title>
 </head>

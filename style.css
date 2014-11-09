@@ -17,9 +17,23 @@ h1 {
   float: left;
 }
 
+#container-left
+{
+  background-color: '#000000';
+  color: '#FFFFFF';
+}
+
+#container-right
+{
+  background-color: '#000000';
+  color: '#FFFFFF';
+}
+
 #container-top
 {
   position: absolute;
+  background-color: '#000000';
+  color: '#FFFFFF';
 }
 
 .inner
