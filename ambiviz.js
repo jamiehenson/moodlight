@@ -1,6 +1,10 @@
-function Ambi(options)
-{
+function Ambiviz(data) {
+  data.objects.forEach(function(object) {
+    process_object(object);
+  }); 
+}
 
+function process_object(options) {
   if (!options.selector) {
     console.log("Ambi: selector element required.");
     return;
@@ -102,7 +106,11 @@ function grab_existing(element, css) {
   var styles = "({";
   for (var key in css) {
     if (css.hasOwnProperty(key)) {
-      styles += '"' + key + '" : "' + style.getPropertyValue(key) + '",';
+      if (style.getPropertyValue(key)) {
+        styles += '"' + key + '" : "' + style.getPropertyValue(key) + '",';  
+      } else {
+        styles += '"' + key + '" : "rgb(255,255,255)",';
+      }
     }
   }
   styles.slice(0, -1);

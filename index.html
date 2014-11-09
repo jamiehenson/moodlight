@@ -3,22 +3,22 @@
   <link href='style.css' rel='stylesheet' type='text/css'>
   <script src="ambiviz.js"></script>
     <script>
-    var a = new Ambi({
-      selector : "container-left",
-      loc : "Bristol",
-      css : {backgroundColor: '#FFFFFF', color: '#000000'}
-    });
-
-    var b = new Ambi({
-      selector : "container-right",
-      loc : "San Francisco",
-      css : {backgroundColor: '#FFFFFF', color: '#000000'}
-    });
-
-    var c = new Ambi({
-      selector : "container-top",
-      css : {color: 'rgb(255, 0, 0)'}
-    });
+    var ambi = new Ambiviz({objects:[
+      {
+        selector : "container-left",
+        loc : "Bristol",
+        css : {backgroundColor: '#000000', color: '#FFFFFF'}
+      },
+      {
+        selector : "container-right",
+        loc : "San Francisco",
+        css : {backgroundColor: '#000000', color: '#FFFFFF'}
+      },
+      {
+        selector : "container-top",
+        css : {color: 'rgb(255, 0, 0)'}
+      }
+    ]});
   </script>
   <title>Ambiviz</title>
 </head>
