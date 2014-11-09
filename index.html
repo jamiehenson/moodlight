@@ -3,10 +3,13 @@
   <link href='style.css' rel='stylesheet' type='text/css'>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.jsdelivr.net/velocity/1.1.0/velocity.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.0.2/jquery.simpleWeather.min.js"></script>
   <script src="ambiviz.js"></script>
-  <script>ambiviz("#container-left","San Francisco, CA");</script>
-  <script>ambiviz("#container-right","Beijing");</script>
+  <script>var a = new ambiviz("#container-left","Bristol");</script>
+  <script>
+    var snip1 = ({backgroundColor: '#000000', color: '#FFFFFF'})
+    var snip2 = ({backgroundColor: '#FFFFFF', color: '#000000'})
+    var b = new ambiviz("#container-right","San Francisco",snip1,snip2);
+  </script>
   <title>Ambiviz</title>
 </head>
 <body>

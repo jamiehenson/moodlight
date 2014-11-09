@@ -20,7 +20,6 @@ h1 {
 #container-top
 {
   position: absolute;
-  color: white;
 }
 
 .inner
@@ -33,9 +32,8 @@ h1 {
 #container-left-footer, #container-right-footer
 {
   position: relative;
-  margin-top: 95%;
+  margin-top: 92%;
   height: 5%;
-  color: white;
   width: 95%;
   padding: 2.5%;
   font-size: 1.5em;
